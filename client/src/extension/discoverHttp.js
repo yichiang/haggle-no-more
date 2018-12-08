@@ -3,10 +3,6 @@ var config = require('dotenv').config()
 
 export default class DiscoverHttp {
   domian = 'http://localhost:4200/'
-  tokenURL = 'https://apis.discover.com/auth/oauth/v2/token'
-  // ENDPOINT = {
-  //   EXCHANGE_RATE: 'dci/currencyconversion/v1/exchangerate'
-  // }
 
   ENDPOINT = {
     EXCHANGE_RATE: 'exchangerate'
@@ -17,9 +13,6 @@ export default class DiscoverHttp {
 
   }
 
-
-  authToken = '6400cade-2f79-48a6-a91b-d45e3c3cf1e7'
-  scope = 'CITYGUIDES DCIOFFERS DCIOFFERS_POST DCILOUNGES DCILOUNGES_POST DCILOUNGES_PROVIDER_LG DCILOUNGES_PROVIDER_DCIPL DCI_ATM DCI_CURRENCYCONVERSION DCI_CUSTOMERSERVICE DCI_TIP'
   getBearToken(){
     const tokenAPIKey = config.DISCOVER_APP_API_KEY
     const tokenAPISecret =config.DISCOVER_APP_API_SECRET
@@ -29,9 +22,7 @@ export default class DiscoverHttp {
 
 
   getExchangeRate(){
-    if(!this.authToken){
-      this.getBearToken().then(x => {console.log(x); this.authToken = x});
-    }
+  
     const url = this.domian + this.ENDPOINT.EXCHANGE_RATE + "?currencycd=ntd";
     const headers = {"X-DFS-API-PLAN": this.HEADER_PLAN.EXCHANGE_RATE, "Authorization": "Bearer " + this.authToken }
     console.log("headers", headers)
