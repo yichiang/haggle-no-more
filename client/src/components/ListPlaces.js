@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './../styles/App.css';
 import { Divider } from 'semantic-ui-react'
-import MerchItem from 'MerchItem';
+import MerchItem from './MerchItem';
 
 class ListPlaces extends Component {
   constructor(props) {
@@ -14,12 +14,12 @@ class ListPlaces extends Component {
     }
 
 
-    
+
     const PlaceLists = () => {
       const merItems = this.state.map(m => {
-        <li>{m.name}</li>
+        return <li>{m.name}</li>
       })
-      
+
       return (
         <ul>{merItems}</ul>
       )
