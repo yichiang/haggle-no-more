@@ -15,7 +15,7 @@ app.options('*', cors());
 app.get('/exchangerate', function(req, res, next) {
   // Handle the get for this route
   var discoverHttp = new DiscoverHttp();
-  return discoverHttp.getExchangeRate().then(x => {
+  return discoverHttp.getExchangeRate(req.query.currencycd).then(x => {
     console.log(x)
     res.send(JSON.stringify(x));
 

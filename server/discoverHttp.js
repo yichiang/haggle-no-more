@@ -41,7 +41,7 @@ module.exports = class DiscoverHttp {
   }
 
 
-  async getExchangeRate(){
+  async getExchangeRate(currencycd){
     if(!this.authToken){
       this.authToken = await this.getBearToken().then(x => {console.log("getBearToken", x); return x.access_token;});
       console.log("token", this.authToken)
@@ -49,7 +49,7 @@ module.exports = class DiscoverHttp {
         return;
       }
     }
-    const url = this.domian + this.ENDPOINT.EXCHANGE_RATE + "?currencycd=ntd";
+    const url = this.domian + this.ENDPOINT.EXCHANGE_RATE + "?currencycd=" + currencycd;
     const headers = {"X-DFS-API-PLAN": this.HEADER_PLAN.EXCHANGE_RATE, "Authorization": "Bearer " + this.authToken }
 
     return this.getData(url, headers )

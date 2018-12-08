@@ -19,7 +19,7 @@ componentDidMount() {
 
 
     var discoverHttp = new DiscoverHttp();
-    discoverHttp.getExchangeRate();
+    discoverHttp.getExchangeRate("TWD");
 }
 
 getNumbers(){

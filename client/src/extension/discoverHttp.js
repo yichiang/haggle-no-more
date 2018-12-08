@@ -21,9 +21,9 @@ export default class DiscoverHttp {
   }
 
 
-  getExchangeRate(){
-  
-    const url = this.domian + this.ENDPOINT.EXCHANGE_RATE + "?currencycd=ntd";
+  getExchangeRate(currencycd){
+
+    const url = this.domian + this.ENDPOINT.EXCHANGE_RATE + "?currencycd=" + currencycd;
     const headers = {"X-DFS-API-PLAN": this.HEADER_PLAN.EXCHANGE_RATE, "Authorization": "Bearer " + this.authToken }
     console.log("headers", headers)
     return this.getData(url, headers )
