@@ -1,6 +1,7 @@
 const config = require('dotenv').config()
 console.log("config", config)
 const fetch = require('node-fetch');
+var querystring = require('querystring');
 
 module.exports = class DiscoverHttp {
   constructor() {
@@ -15,7 +16,7 @@ module.exports = class DiscoverHttp {
 
     }
 
-    this.authToken = '6400cade-2f79-48a6-a91b-d45e3c3cf1e7'
+    this.authToken = ''
     this.scope = 'CITYGUIDES DCIOFFERS DCIOFFERS_POST DCILOUNGES DCILOUNGES_POST DCILOUNGES_PROVIDER_LG DCILOUNGES_PROVIDER_DCIPL DCI_ATM DCI_CURRENCYCONVERSION DCI_CUSTOMERSERVICE DCI_TIP'
 
    }
@@ -26,18 +27,29 @@ module.exports = class DiscoverHttp {
   getBearToken(){
     const tokenAPIKey = config.DISCOVER_APP_API_KEY
     const tokenAPISecret =config.DISCOVER_APP_API_SECRET
-    const headers = {"Content-Type": 'application/x-www-form-urlencoded', "Authorization": "Basic " + btoa(`${tokenAPIKey}:${tokenAPISecret}`) }
-    return this.postData(this.tokenURL+"grant_type=client_credentials&scope=" + this.scope, headers);
+    const auth = 'Basic ' + Buffer.from(`${tokenAPIKey}:${tokenAPISecret}`).toString('base64');
+
+    const headers = {"Content-Type": 'application/x-www-form-urlencoded', "Authorization": auth }
+    console.log("headers", headers)
+    var postData = querystring.stringify({
+      grant_type: "client_credentials",
+      scope:  this.scope
+    });
+    return this.postData(this.tokenURL, postData, headers);
   }
 
 
   async getExchangeRate(){
     if(!this.authToken){
-      this.getBearToken().then(x => {console.log(x); this.authToken = x});
+      var token = await this.getBearToken().then(x => {console.log("getBearToken", x); return x;});
+      console.log("token", token)
+      if(!token){
+        return;
+      }
     }
     const url = this.domian + this.ENDPOINT.EXCHANGE_RATE + "?currencycd=ntd";
     const headers = {"X-DFS-API-PLAN": this.HEADER_PLAN.EXCHANGE_RATE, "Authorization": "Bearer " + this.authToken }
-    console.log("headers", headers)
+
     return this.getData(url, headers )
   }
 
@@ -49,12 +61,12 @@ module.exports = class DiscoverHttp {
             ...extendHeader
             // "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
+        body: data, // body data type must match "Content-Type" header
     };
     console.log("allHeader", allHeader)
 
     return fetch(url, allHeader)
-    .then(response => response.json());
+    .then(response => {console.log(response); return response;});
   }
   getData(url, extendHeader){
 
