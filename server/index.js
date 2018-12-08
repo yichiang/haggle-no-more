@@ -4,14 +4,18 @@ var path    = require("path");
 var DiscoverHttp = require('./discoverHttp')
 var cors = require('cors')
 
+app.all('/*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 app.use(cors())
+app.options('*', cors());
 
-app.get('/getExchangeRate', function(req, res, next) {
+app.get('/exchangerate', function(req, res, next) {
   // Handle the get for this route
   var discoverHttp = new DiscoverHttp();
-  console.log(discoverHttp)
-  var _self = this;
-  const data = discoverHttp.getExchangeRate().then(x => {
+  return discoverHttp.getExchangeRate().then(x => {
     console.log(x)
     res.send(JSON.stringify(x));
 

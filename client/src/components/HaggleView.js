@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import './../styles/App.css';
 import { Divider, Button } from 'semantic-ui-react'
+import $ from 'jquery'
+import DiscoverHttp from './../extension/discoverHttp'
+
+
 class HaggleView extends Component {
 
 constructor(){
@@ -12,13 +16,10 @@ constructor(){
 }
 componentDidMount() {
 
-  fetch('http://localhost:4200/getExchangeRate', {
-      method: "GET", // *GET, POST, PUT, DELETE, etc.
-      headers: {
-          "Content-Type": "application/json; charset=utf-8",
-      },
-  })
-  .then(response => { console.log("response", response); response.json()})
+
+
+    var discoverHttp = new DiscoverHttp();
+    discoverHttp.getExchangeRate();
 }
 
 getNumbers(){
