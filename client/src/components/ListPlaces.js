@@ -15,12 +15,24 @@ class ListPlaces extends Component {
 
 
     
-    const PlaceLits = () => {
-
-      merchesArray.map(merch => {
-        <MerchItem onCLick={} item={merch} id={merch.id}/>
-
+    const PlaceLists = () => {
+      const merItems = this.state.map(m => {
+        <li>{m.name}</li>
       })
+      
+      return (
+        <ul>{merItems}</ul>
+      )
+
+
+
+      // this.state.merchesArray.map(merch => {
+      //   <MerchItem item={merch} id={merch.id}/>
+      // })
+    }
+
+    const onPlaceClick = () => {
+      return null
     }
   }
 
@@ -35,7 +47,7 @@ class ListPlaces extends Component {
 
 
       <div class="HaggleContainer">
-        {PlaceLits}
+        <PlaceLists />
       <Divider/>
       </div>
     );
