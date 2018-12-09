@@ -1,7 +1,7 @@
 {
-  "main.css": "/static/css/main.0ba80459.chunk.css",
-  "main.js": "/static/js/main.ea8f2c3a.chunk.js",
-  "main.js.map": "/static/js/main.ea8f2c3a.chunk.js.map",
+  "main.css": "/static/css/main.3bfd95ab.chunk.css",
+  "main.js": "/static/js/main.c1b113c0.chunk.js",
+  "main.js.map": "/static/js/main.c1b113c0.chunk.js.map",
   "static/css/1.578c3b6d.chunk.css": "/static/css/1.578c3b6d.chunk.css",
   "static/js/1.9f67e62d.chunk.js": "/static/js/1.9f67e62d.chunk.js",
   "static/js/1.9f67e62d.chunk.js.map": "/static/js/1.9f67e62d.chunk.js.map",
@@ -16,9 +16,9 @@
   "static/media/Check_Button.svg": "/static/media/Check_Button.521df833.svg",
   "static/media/X_Button.svg": "/static/media/X_Button.a0ab9872.svg",
   "static/media/Markets.svg": "/static/media/Markets.ea609758.svg",
-  "static/css/main.0ba80459.chunk.css.map": "/static/css/main.0ba80459.chunk.css.map",
+  "static/css/main.3bfd95ab.chunk.css.map": "/static/css/main.3bfd95ab.chunk.css.map",
   "static/css/1.578c3b6d.chunk.css.map": "/static/css/1.578c3b6d.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.4e4ef5a587b75a99e18878d3a67bb0c7.js": "/precache-manifest.4e4ef5a587b75a99e18878d3a67bb0c7.js",
+  "precache-manifest.d765109bfaac3b425e64d4ee70e04a98.js": "/precache-manifest.d765109bfaac3b425e64d4ee70e04a98.js",
   "service-worker.js": "/service-worker.js"
 }
