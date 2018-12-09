@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Divider, Grid } from 'semantic-ui-react'
-import $ from 'jquery'
+import { Grid } from 'semantic-ui-react'
 import ReactSVG from 'react-svg'
 import Price from './../images/Price.svg';
 import Markets from './../images/Markets.svg';
