@@ -32,12 +32,12 @@ class ListPlaces extends Component {
       success: function(response) {
         var pla = $.parseJSON(response);
 ;
-       if(pla.results){
+       if(pla.results && pla.results.length > 0){
        var  currLocs =  self.state.currLocs
-       currLocs[i].rating = pla.results[0].rating;
-       currLocs[i].place_id = pla.results[0].place_id;
-       currLocs[i].reference = pla.results[0].reference;
-       const photos = pla.results[0].photos;
+       currLocs[i].rating = pla.results[0].rating || 0;
+       currLocs[i].place_id = pla.results[0].place_id || 'n/a';
+       currLocs[i].reference = pla.results[0].reference || 'n/a';
+       const photos = pla.results[0].photos
        if(photos && photos.length){
          currLocs[i].photo_reference  = photos[0].photo_reference;
          $.ajax({
