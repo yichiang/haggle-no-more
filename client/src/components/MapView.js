@@ -33,13 +33,14 @@ class MapView extends Component {
         <div className="top" style={topStyle}>
           <p className="topText">Bangkok Markets</p>
         </div>
-      
+
       <div className="second_handler" >
       <div></div>
-        <ReactSVG src={ListIcon} className="clickableIcon" onClick={() => this.props.history.push('/place')}/>
+
+        <ReactSVG src={ListIcon} className="clickableIcon" onClick={this.props.toggleMaps}/>
       </div>
 
-        <iframe 
+        <iframe
           title="Leaflet map of location with markets marked"
           src="https://s3.amazonaws.com/discoverhack/maps/index.html"
           style={mapContainer}

@@ -10,7 +10,7 @@ import MapIcon from './../images/Map_icon.svg';
 import MerchItem from './MerchItem'
 import Footer from './Footer';
 import $ from 'jquery'
-
+import MapView from './MapView'
 
 
 class ListPlaces extends Component {
@@ -20,8 +20,10 @@ class ListPlaces extends Component {
       currLocs: [],
       allLocs: [],
       initLocs: [],
-      curDropVal: 'Retail'
+      curDropVal: 'Retail',
+      toggleMapView: false
     }
+    this.toggleMaps = this.toggleMaps.bind(this)
   }
 
   getGooglePlaceInformation(i, address, points){
@@ -117,7 +119,7 @@ setDataPlaces(){
       return x;
     }
   })
-  
+
   setTimeout(() => {
     let a = this.state.initLocs;
     for (let i = a.length - 1; i > 0; i--) {
@@ -131,6 +133,10 @@ setDataPlaces(){
 
   getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
+  }
+
+  toggleMaps(){
+    this.setState({toggleMapView: !this.state.toggleMapView})
   }
 
   render() {
@@ -196,24 +202,29 @@ setDataPlaces(){
     }
 
     return (
-      <div className="listPlaces">
+      <div>
+      {!this.state.toggleMapView ? <div className="listPlaces">
         <div className="top" style={topStyle}>
           <p className="topText">Bangkok Markets</p>
         </div>
 
-    <div className="second_handler" >
-    <div className="filter" style={{fontSize: 25}}>
-      <Dropdown options={dropOptions} value={this.state.curDropVal}
-      onChange={dropDownHandler}
-       placeholder="Filter by Merchants"/>
-    </div>
-    <ReactSVG src={MapIcon} className="clickableIcon" onClick={() => this.props.history.push('/map')}/>
+        <div className="second_handler" >
+        <div className="filter" style={{fontSize: 25}}>
+          <Dropdown options={dropOptions} value={this.state.curDropVal}
+          onChange={dropDownHandler}
+           placeholder="Filter by Merchants"/>
+            </div>
+            <ReactSVG src={MapIcon} className="clickableIcon" onClick={this.toggleMaps}/>
 
-    </div>
+            </div>
 
-        <Places style={placesStyle} />
-      <Divider/>
+            <Places style={placesStyle} />
+          <Divider/>
       <div><Footer {...this.props}/></div>
+      </div>
+      :
+      <MapView toggleMaps = {this.toggleMaps}/>
+      }
       </div>
     );
   }
