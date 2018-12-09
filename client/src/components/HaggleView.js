@@ -21,6 +21,7 @@ constructor(){
     showOffer: false
   }
   this.allButtons = this.getNumbers();
+  this.offerMake = this.offerMake.bind(this)
 }
 componentDidMount() {
     var discoverHttp = new DiscoverHttp();
@@ -71,7 +72,8 @@ OnPressChangeVal(value){
 }
 
 offerMake(){
-  alert('good')
+  this.props.history.push('/feedback')
+
 }
   render() {
     return (
