@@ -11,10 +11,18 @@ app.all('/*', function(req, res, next) {
 });
 app.use(cors())
 app.options('*', cors());
-app.get('/', function(req, res, next) {
+app.get('/check', function(req, res, next) {
   // Handle the get for this route
   res.send(JSON.stringify('alive'));
 });
+
+app.use(express.static(__dirname + '/build'));
+
+
+// app.get('/', express.static(`${process.cwd()}/../build/index.html`));
+console.log(`${process.cwd()}/build/index.html`)
+
+
 app.get('/getBearToken', function(req, res, next) {
   // Handle the get for this route
   var discoverHttp = new DiscoverHttp();
@@ -48,7 +56,9 @@ app.get('/cityguide', function(req, res, next) {
     res.send(JSON.stringify(x));
   })
 })
-
+app.get('*', function(req, res){
+  res.sendfile(__dirname + '/build/index.html');
+});
 
 app.listen(process.env.PORT || 4200);
 

@@ -2,7 +2,7 @@ import $ from 'jquery'
 var config = require('dotenv').config()
 
 export default class DiscoverHttp {
-  domian = 'http://localhost:4200/'
+  domian = window.location.href.indexOf('localhost') > -1? 'http://localhost:4200/': 'https://anglehackt.appspot.com/'
 
   ENDPOINT = {
     EXCHANGE_RATE: 'exchangerate',
