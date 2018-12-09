@@ -16,6 +16,7 @@ class MapView extends Component {
       <div>
         {/* <div dangerouslySetInnerHTML={createMarkup()} /> */}
         <iframe 
+          title="Leaflet map of location with markets marked"
           src="localhost:3000/maps/index.html"
           style={mapContainer}
         ></iframe>
