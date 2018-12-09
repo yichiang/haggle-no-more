@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Divider, Grid } from 'semantic-ui-react'
+import { Divider, Grid, Icon } from 'semantic-ui-react'
 import $ from 'jquery'
 import ReactSVG from 'react-svg'
 import Price from './../images/Price.svg';
@@ -14,8 +14,11 @@ constructor(){
   super();
   this.state = {
     questions: [{
-      'q': 'Did you make a purchase at Market 2?',
-      'optionsType': 'binary'
+      'q': 'Did you pay with cash or card?',
+      'optionsType': 'binary',
+      'options': ['cash', 'card'],
+      'iconNames' : ['money bill alternate outline', 'credit card']
+
     },
     {
       'q': 'How much discount did you receive?',
@@ -54,12 +57,11 @@ onPressSubmit(){
           <p>{currentQ.q}</p>
           {currentQ.optionsType === 'binary' ?
             <div className="all_feedback_selection">
-            <div className="feedback_selection" onClick={this.onPressSubmit}>
-            yes
-            </div>
-            <div className="feedback_selection" onClick={this.onPressSubmit}>
-            no
-            </div>
+            {currentQ.options && currentQ.options.map((x, i) =>
+               <div className="feedback_selection"  onClick={this.onPressSubmit}>
+               {currentQ.iconNames && <Icon name={currentQ.iconNames[i]}/> }{x}
+               </div>
+             )}
             </div>
             :
             <div className="all_feedback_selection all_feedback_selection_col">
