@@ -36,17 +36,17 @@ class ListPlaces extends Component {
 
   render() {
     let idIter = 0
-    const PlaceLists = () => {
+    const Places = () => {
       const merItems = this.state.merchesArray.map(m => {
         idIter++;
-        return <li key={idIter}>
+        return <li key={idIter} style={locStyle}>
                   <h3>{m.name}</h3>
                   <p> Address: {m.address1}</p>
               </li>
       })
 
       return (
-        <ul>{merItems}</ul>
+        <ul style={placesStyle}>{merItems}</ul>
       )
     }
 
@@ -60,6 +60,23 @@ class ListPlaces extends Component {
       fontSize: 30
       
     }
+
+    const placesStyle = {
+      padding: '20px',
+      marginBottom: 10,
+      border: 'solid',
+      borderColor: '#0b3c5d',
+      borderWidth: 1,
+      position: 'relative',
+      display: 'block',
+      listStyleType: 'none'
+    }
+
+    const locStyle = {
+      borderColor: 'white'
+
+    }
+
     
     return (
       <div className="listPlaces">
@@ -71,7 +88,7 @@ class ListPlaces extends Component {
           Filter Banner
         </div>
 
-        <PlaceLists />
+        <Places style={placesStyle} />
       <Divider/>
       </div>
     );
