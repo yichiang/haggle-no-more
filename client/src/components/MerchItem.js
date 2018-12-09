@@ -20,7 +20,8 @@ class MerchItem extends Component {
 
                   </div>
                   <div>
-                    <ReactSVG src={DiscoverLogo}/>
+                  {m.card_network === "DCI" && <ReactSVG src={DiscoverLogo}/>}
+
                   </div>
                 </div>
                 <div className="merchants_row_item">
@@ -28,7 +29,8 @@ class MerchItem extends Component {
                   <p className='text_address'>{m.address1}</p>
                   <p className='text_address'>{m.phone}
                   </p>
-                  {m.rating && <Rating icon='star' defaultRating={m.rating} maxRating={5} />} {m.rating}
+                  {m.rating > 0 && <Rating icon='star' defaultRating={m.rating} maxRating={5} />}
+                  {m.rating > 0 && <span>{m.rating}</span>}
 
                   </div>
                   <div>
