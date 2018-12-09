@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <BrowserRouter>
          <Switch>
-           <Route exact path={'/'} component={(props) =><Home {...props}/>} />
+           <Route exact path={'/'} component={(props) =><ListPlaces {...props}/>} />
            <Route exact path={'/feedback'} component={(props) =><Feedback {...props}/>} />
            <Route exact path={'/place'} component={(props) =><ListPlaces {...props}/>} />
            <Route exact path={'/haggle'} component={(props) =><HaggleView {...props}/>} />
