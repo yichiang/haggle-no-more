@@ -18,13 +18,14 @@ class ListPlaces extends Component {
     super(props);
     this.state = {
       currLocs: [],
-      allLocs: []
+      allLocs: [],
+      initLocs: []
     }
   }
 
   getGooglePlaceInformation(i, address, points){
     var self = this;
-    var  currLocs =  self.state.currLocs
+    var  currLocs =  self.state.initLocs
 
     var discoverHttp = new DiscoverHttp();
     var url = discoverHttp.domian + `googlePlace?query=${address.split(' ').join('+')}&location=${points[0]},${points[1]}`;
@@ -67,7 +68,7 @@ class ListPlaces extends Component {
            }
          }
 
-         self.setState({currLocs: currLocs})
+         self.setState({initLocs: currLocs})
        }
         return response
       },
@@ -92,7 +93,7 @@ class ListPlaces extends Component {
                   return loc.mcc === "retail"
                 })
               })
-              .then(r => this.setState({currLocs: r}))
+              .then(r => this.setState({initLocs: r}))
               .then(r => {
                 self.setDataPlaces();
               })
@@ -104,7 +105,7 @@ setDataPlaces(){
 
   console.log("x!!!", this.state.currLocs)
 
-  this.state.currLocs.map((x, i) => {
+  this.state.initLocs.map((x, i) => {
 
     if(i > 10){
       return x;
@@ -114,8 +115,17 @@ setDataPlaces(){
       self.getGooglePlaceInformation(i, x.address1, x.point)
       return x;
     }
-
   })
+  
+  setTimeout(() => {
+    let a = this.state.initLocs;
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    this.setState({currLocs: a})
+  }, 1500)
+
 }
 
   render() {
