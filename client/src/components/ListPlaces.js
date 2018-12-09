@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import './../styles/App.css';
 import { Divider } from 'semantic-ui-react'
 import DiscoverHttp from './../extension/discoverHttp'
+import Dropdown from 'react-dropdown';
 
 
 class ListPlaces extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      currLocs: [],
+      allLocs: [],
       merchesArray: [
         // {name:'Bob Shop', id: 1},
         // {name: 'John Store', id: 2}
@@ -16,37 +19,35 @@ class ListPlaces extends Component {
     }
   }
 
-
-
   componentDidMount(){
 
     var discoverHttp = new DiscoverHttp();
     let res = discoverHttp.getCityGuide("bangkok")
-              // .done(res => JSON.parse(res))
               .then(obj => {
                 obj = JSON.parse(obj)
+                this.setState({allLocs: obj})
                 // console.log(obj)
                 return obj.result.filter(loc => {
                   return loc.mcc === "retail"
                 })
               })
-              .then(r => this.setState({merchesArray: r}))
+              .then(r => this.setState({currLocs: r}))
   }
 
 
   render() {
     let idIter = 0
-    const PlaceLists = () => {
-      const merItems = this.state.merchesArray.map(m => {
+    const Places = () => {
+      const merItems = this.state.currLocs.map(m => {
         idIter++;
-        return <li key={idIter}>
+        return <li key={idIter} style={locStyle}>
                   <h3>{m.name}</h3>
                   <p> Address: {m.address1}</p>
               </li>
       })
 
       return (
-        <ul>{merItems}</ul>
+        <ul style={placesStyle}>{merItems}</ul>
       )
     }
 
@@ -60,6 +61,32 @@ class ListPlaces extends Component {
       fontSize: 30
       
     }
+
+    const placesStyle = {
+      padding: '20px',
+      marginBottom: 10,
+      border: 'solid',
+      borderColor: '#0b3c5d',
+      borderWidth: 1,
+      position: 'relative',
+      display: 'block',
+      listStyleType: 'none'
+    }
+
+    const locStyle = {
+      borderColor: 'white'
+
+    }
+
+    const dropOptions = ['retail', 'restaurants', 'hotels']
+
+    const dropDownHandler = (selected) => {
+      console.log(this.state.allLocs.result)
+      var s = this.state.allLocs.result.filter(loc => { 
+        return loc.mcc === selected.value
+      })
+      this.setState({currLocs: s})
+    }
     
     return (
       <div className="listPlaces">
@@ -67,11 +94,12 @@ class ListPlaces extends Component {
           Top Banner
         </div>
 
-        <div className="filter">
-          Filter Banner
+        <div className="filter" style={{fontSize: 25}}>
+          <Dropdown options={dropOptions} value={"Filter"} 
+          onChange={dropDownHandler} />
         </div>
 
-        <PlaceLists />
+        <Places style={placesStyle} />
       <Divider/>
       </div>
     );
