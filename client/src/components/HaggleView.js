@@ -19,11 +19,15 @@ constructor(){
     convertValues: 0,
     exchange_rate: 0,
     currencycd: "THB",
-    showOffer: false
+    showOffer: false,
+    reverseOffer: false,
+    appendClassName: '',
   }
   this.allButtons = this.getNumbers();
   this.offerMake = this.offerMake.bind(this)
+  this.rejectOffer = this.rejectOffer.bind(this);
 }
+
 componentDidMount() {
     var discoverHttp = new DiscoverHttp();
     var self = this;
@@ -35,6 +39,7 @@ componentDidMount() {
 }
 
 handleNumber(number){
+  this.setState({appendClassName: 'an_c_ca'})
   const currentDisplayVal = this.state.propsedValues * 10 +  number;
   console.log("this.state.exchange_rate", this.state.exchange_rate)
   console.log(currentDisplayVal / this.state.exchange_rate)
@@ -42,6 +47,8 @@ handleNumber(number){
     propsedValues: currentDisplayVal,
     convertValues: currentDisplayVal / this.state.exchange_rate
   });
+  var self =this;
+  setTimeout(() =>self.setState({appendClassName: ''}),2000)
  }
 
  onHandleAction(action){
@@ -76,23 +83,31 @@ offerMake(){
   this.props.history.push('/feedback')
 
 }
+
+rejectOffer(){
+  this.setState({reverseOffer: !this.state.reverseOffer})
+}
   render() {
     return (
-      <div>
+      <div className={this.state.reverseOffer? 'reverseOffer-view': ''}>
       {this.state.showOffer &&
-        <div className="offer_panel">
+        <div className={this.state.reverseOffer? "offer_panel_reverse":"offer_panel"}>
         <div className="offer_inner">
         <p className="client_view_price" style={{margin: 0}}>
         ฿ {this.state.convertValues.toFixed(2).toLocaleString()}
         </p>
 
+        {this.state.reverseOffer && <p className="client_view_price client_view_price_small" style={{margin: 0}}>
+        $ ({this.state.propsedValues.toFixed(2).toLocaleString()})
+        </p>}
+
         <div className="group_button">
-        <div  onClick={this.offerMake}>
+        <div className="clickableIcon" onClick={this.offerMake}>
         <ReactSVG src={Check_Button}
         svgStyle={{ width: 50 }}
         />
         </div>
-        <div>
+        <div  className="clickableIcon" onClick={this.rejectOffer}>
         <ReactSVG src={X_Button}
         svgStyle={{ width: 50 }}
         />
@@ -101,21 +116,21 @@ offerMake(){
       </div>
         </div>
       }
-      <div className={this.state.showOffer? "cal_main cal_main_openOffer": "cal_main"}>
+      <div className={this.state.showOffer? ("cal_main cal_main_openOffer" +( this.state.reverseOffer? ' cal_main_openOffer_reverse' : '')): "cal_main"}>
       <div className="cal_main_wrap">
       <div className="cal_display">
       <div><Flag name='th'  svgStyle={{ width: 25 }} /></div>
 
         <p>฿ {this.state.convertValues.toFixed(2).toLocaleString()}</p>
       </div>
-      <div className="cal_display">
+      <div className={"cal_display " + this.state.appendClassName }>
 
         <div><Flag name='us'  svgStyle={{ width: 25 }} /></div>
 
           <p>${this.state.propsedValues.toFixed(2).toLocaleString()}</p>
         </div>
         </div>
-<div style={{display: 'flex', justifyContent: 'center'}}>
+<div style={{display: 'flex', justifyContent: 'center', marginTop: '40px'}}>
   <div className="">
   <div className="cal_row">
     <p className="letter_square" onClick={() => this.OnPressChangeVal(1)}>1</p>
@@ -144,11 +159,11 @@ offerMake(){
 </div>
 <div  className="cal_col_test">
 <p className="letter_square" onClick={() => this.onHandleAction('back')}>
-<ReactSVG src={Back_Button} svgStyle={{ width: 20 }}/>
+<ReactSVG src={Back_Button} svgStyle={{ width: 40 }}/>
 </p>
 <p className="letter_square letter_icon" onClick={() => this.onHandleAction('offer')}>
 <ReactSVG src={Send_Button}
-svgStyle={{ width: 20 }}
+svgStyle={{ width: 40 }}
 
 />
 </p>
