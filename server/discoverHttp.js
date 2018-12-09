@@ -51,7 +51,7 @@ async getAtmFinder(longitude, latitude,radius, maxresults ){
       return;
     }
   }
-  const url = this.domian + this.ENDPOINT.ATM_FINDER + "?radius="+radius"&view=1&maxresults="+"&longitude=" + longitude + "&latitude="+ latitude;
+  const url = this.domian + this.ENDPOINT.ATM_FINDER + "?radius="+radius+"&view=1&maxresults="+maxresults+"&longitude=" + longitude + "&latitude="+ latitude;
   const headers = {"X-DFS-API-PLAN": this.HEADER_PLAN.ATM_FINDER, "Authorization": "Bearer " + this.authToken }
 
   return this.getData(url, headers )
