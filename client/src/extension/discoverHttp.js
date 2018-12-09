@@ -55,10 +55,11 @@ export default class DiscoverHttp {
     .then(response => response.json());
   }
   getData(url, extendHeader){
-
     const allHeader = {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         headers: {
+          "Access-Control-Allow-Origin":"*",
+          "Access-Control-Allow-Headers": "*",
             "Content-Type": "application/json; charset=utf-8",
             ...extendHeader
             // "Content-Type": "application/x-www-form-urlencoded",
