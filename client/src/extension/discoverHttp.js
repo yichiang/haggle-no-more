@@ -59,13 +59,14 @@ export default class DiscoverHttp {
     // return fetch(url, allHeader)
     // .then(response => { console.log("response", response); response.json()});
 
-    $.ajax({
+    return  $.ajax({
        url: url,
 
        type: 'GET',
        headers: allHeader,
        success: function(response) {
          console.log(response);
+         return response
        },
        error: function(error) {
        }
