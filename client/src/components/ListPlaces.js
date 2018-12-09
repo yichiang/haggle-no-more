@@ -19,7 +19,8 @@ class ListPlaces extends Component {
     this.state = {
       currLocs: [],
       allLocs: [],
-      initLocs: []
+      initLocs: [],
+      curDropVal: 'Retail'
     }
   }
 
@@ -181,7 +182,7 @@ setDataPlaces(){
       var s = this.state.allLocs.result.filter(loc => {
         return loc.mcc === selected.value
       })
-      this.setState({currLocs: s})
+      this.setState({currLocs: s, curDropVal: selected.label})
       this.setDataPlaces();
 
     }
@@ -194,7 +195,7 @@ setDataPlaces(){
 
     <div className="second_handler" >
     <div className="filter" style={{fontSize: 25}}>
-      <Dropdown options={dropOptions} value={dropOptions[0]}
+      <Dropdown options={dropOptions} value={this.state.curDropVal}
       onChange={dropDownHandler}
        placeholder="Filter by Merchants"/>
     </div>
