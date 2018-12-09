@@ -23,7 +23,9 @@ class ListPlaces extends Component {
   }
 
   getGooglePlaceInformation(i, address, points){
-    var self = this
+    var self = this;
+    var  currLocs =  self.state.currLocs
+  
     var discoverHttp = new DiscoverHttp();
     var url = discoverHttp.domian + `googlePlace?query=${address.split(' ').join('+')}&location=${points[0]},${points[1]}`;
     var urlImage = discoverHttp.domian + `googlePlaceImage?photo_reference=`;
@@ -34,33 +36,37 @@ class ListPlaces extends Component {
       success: function(response) {
         var pla = $.parseJSON(response);
 ;
-       if(pla.results && pla.results.length > 0){
-       var  currLocs =  self.state.currLocs
-       currLocs[i].rating = pla.results[0].rating || 0;
-       currLocs[i].place_id = pla.results[0].place_id || 'n/a';
-       currLocs[i].reference = pla.results[0].reference || 'n/a';
-       const photos = pla.results[0].photos
-       if(photos && photos.length){
-         currLocs[i].photo_reference  = photos[0].photo_reference;
-         $.ajax({
-            url: urlImage+photos[0].photo_reference,
 
-            type: 'GET',
-            success: function(response) {
-             //  console.log(response);
-             currLocs[i].imageBinary = response;
-            //  console.log("currLocs[i].imageBinary", currLocs[i].imageBinary);
-             self.setState({currLocs: currLocs})
+       if(pla.results){
+         for (var j = 0; j < pla.results.length; j++) {
+           if(j === 0){
 
-              return response
-            },
-            error: function(error) {
-            }
-           });
+             currLocs[i].rating = pla.results[0].rating || 0;
+             currLocs[i].place_id = pla.results[0].place_id || 'n/a';
+             currLocs[i].reference = pla.results[0].reference || 'n/a';
+             const photos = pla.results[0].photos
+             if(photos && photos.length){
+               currLocs[i].photo_reference  = photos[0].photo_reference;
+             }
+           }else{
 
-       }
-       console.log("currLocs", currLocs[i])
-       self.setState({currLocs: currLocs})
+             var  currLocsNew = {}
+             currLocsNew.address1 = pla.results[j].formatted_address? pla.results[j].formatted_address.split('Bangkok')[0] : '';
+             currLocsNew.name = pla.results[j].name || 0;
+             currLocsNew.card_network = 'UnKnown';
+             currLocsNew.point = [pla.results[j].geometry.location.lat, pla.results[j].geometry.location.lng];
+
+             currLocsNew.mcc = currLocs[0].mcc;
+
+             currLocsNew.rating = pla.results[j].rating || 0;
+             currLocsNew.place_id = pla.results[j].place_id || 'n/a';
+             currLocsNew.reference = pla.results[j].reference || 'n/a';
+
+             currLocs.unshift(currLocsNew)
+           }
+         }
+
+         self.setState({currLocs: currLocs})
        }
         return response
       },
@@ -68,21 +74,7 @@ class ListPlaces extends Component {
       }
      });
 
-    // var discoverHttp = new DiscoverHttp();
-    //
-    // discoverHttp.getData(, {}))
-    // .then(pla => {
-    //   console.log("pla",pla)
-    //
-    //   if(pla.results){
-    //   var  currLocs =  this.state.currLocs
-    //   currLocs[i].rating = pla.results[0].rating;
-    //   currLocs[i].place_id = pla.results[0].place_id;
-    //   currLocs[i].reference = pla.results[0].reference;
-    //   console.log("currLocs", currLocs[i])
-    //   this.setState({currLocs: currLocs})
-    //   }
-    // })
+
   }
 
 
@@ -128,14 +120,16 @@ setDataPlaces(){
   render() {
     let idIter = 0
     const Places = () => {
-      const merItems = this.state.currLocs.map(m => {
-        idIter++;
-        return <MerchItem idIter={idIter} m={m} locStyle={locStyle}/>
-      })
+        const merItems = this.state.currLocs.map(m => {
+          idIter++;
+          return <MerchItem idIter={idIter} m={m} locStyle={locStyle}/>
+        })
 
-      return (
-        <ul className="metchant_parents">{merItems}</ul>
-      )
+        return (
+          <ul className="metchant_parents">{merItems}</ul>
+        )
+
+
     }
 
 

@@ -61,6 +61,19 @@ app.get('/getBearToken', function(req, res, next) {
   //discoverHttp.getExchangeRate().then(res => console.log(res));
 });
 
+app.get('/atmFinder', function(req, res, next) {
+  // Handle the get for this route
+  var discoverHttp = new DiscoverHttp();
+  return discoverHttp.getAtmFinder(req.query.longitude, req.query.latitude).then(x => {
+    console.log(x)
+    res.send(JSON.stringify(x));
+
+  })
+
+  //discoverHttp.getExchangeRate().then(res => console.log(res));
+});
+
+
 
 app.get('/exchangerate', function(req, res, next) {
   // Handle the get for this route
