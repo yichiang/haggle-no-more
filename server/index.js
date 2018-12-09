@@ -15,6 +15,18 @@ app.get('/', function(req, res, next) {
   // Handle the get for this route
   res.send(JSON.stringify('alive'));
 });
+app.get('/getBearToken', function(req, res, next) {
+  // Handle the get for this route
+  var discoverHttp = new DiscoverHttp();
+  return discoverHttp.getBearToken().then(x => {
+    console.log(x)
+    res.send(JSON.stringify(x.access_token));
+
+  })
+
+  //discoverHttp.getExchangeRate().then(res => console.log(res));
+});
+
 
 app.get('/exchangerate', function(req, res, next) {
   // Handle the get for this route
