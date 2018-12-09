@@ -75,7 +75,7 @@ export default class DiscoverHttp {
        type: 'GET',
        headers: allHeader,
        success: function(response) {
-         console.log(response);
+        //  console.log(response);
          return response
        },
        error: function(error) {
