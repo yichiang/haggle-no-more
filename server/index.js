@@ -38,6 +38,6 @@ app.get('/cityguide', function(req, res, next) {
 })
 
 
-app.listen(4200);
+app.listen(process.env.PORT || 4200);
 
 console.log("Running at Port 4200");
