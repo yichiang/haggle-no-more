@@ -153,7 +153,7 @@ svgStyle={{ width: 20 }}
 </div>
 
       </div>
-        <Footer/>
+        <Footer {...this.props}/>
 
       </div>
     );

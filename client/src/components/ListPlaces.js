@@ -49,7 +49,7 @@ class ListPlaces extends Component {
             success: function(response) {
              //  console.log(response);
              currLocs[i].imageBinary = response;
-             console.log("currLocs[i].imageBinary", currLocs[i].imageBinary);
+            //  console.log("currLocs[i].imageBinary", currLocs[i].imageBinary);
              self.setState({currLocs: currLocs})
 
               return response
@@ -184,7 +184,7 @@ setDataPlaces(){
     return (
       <div className="listPlaces">
         <div className="top" style={topStyle}>
-          <p className="topText">Bankok Markets</p>
+          <p className="topText">Bangkok Markets</p>
         </div>
 
     <div className="second_handler" >
@@ -199,7 +199,7 @@ setDataPlaces(){
 
         <Places style={placesStyle} />
       <Divider/>
-      <div><Footer /></div>
+      <div><Footer {...this.props}/></div>
       </div>
     );
   }
