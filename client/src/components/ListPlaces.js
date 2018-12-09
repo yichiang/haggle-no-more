@@ -36,6 +36,7 @@ class ListPlaces extends Component {
       success: function(response) {
         var pla = $.parseJSON(response);
 ;
+
        if(pla.results){
          for (var j = 0; j < pla.results.length; j++) {
            if(j === 0){
@@ -178,7 +179,7 @@ setDataPlaces(){
     return (
       <div className="listPlaces">
         <div className="top" style={topStyle}>
-          <p className="topText">Bankok Markets</p>
+          <p className="topText">Bangkok Markets</p>
         </div>
 
     <div className="second_handler" >
@@ -193,7 +194,7 @@ setDataPlaces(){
 
         <Places style={placesStyle} />
       <Divider/>
-      <div><Footer /></div>
+      <div><Footer {...this.props}/></div>
       </div>
     );
   }
