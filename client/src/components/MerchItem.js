@@ -21,7 +21,8 @@ class MerchItem extends Component {
                   </div>
                   <div>
                   {m.card_network === "DCI" && <ReactSVG src={DiscoverLogo}/>}
-
+                  
+                  <div style={{marginTop:-2}}><p className='text_address'>0.1 m</p></div>
                   </div>
                 </div>
                 <div className="merchants_row_item">

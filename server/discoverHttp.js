@@ -80,7 +80,7 @@ async getAtmFinder(longitude, latitude,radius, maxresults ){
         return;
       }
     }
-    const url = this.domian + this.ENDPOINT.CITY_GUIDE + "?merchant_city=" + cityname + "&pagesize=300";
+    const url = this.domian + this.ENDPOINT.CITY_GUIDE + "?merchant_city=" + cityname + "&pagesize=100";
     const headers = {"X-DFS-API-PLAN": this.HEADER_PLAN.CITY_GUIDE, "Authorization": "Bearer " + this.authToken }
 
     return this.getData(url, headers )
