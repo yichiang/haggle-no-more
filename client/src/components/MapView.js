@@ -15,8 +15,8 @@ class MapView extends Component {
     return (
       <div>
         {/* <div dangerouslySetInnerHTML={createMarkup()} /> */}
-        <iframe 
-          src="localhost:3000/maps/index.html"
+        <iframe
+          src="https://s3.amazonaws.com/discoverhack/maps/index.html"
           style={mapContainer}
         ></iframe>
       </div>

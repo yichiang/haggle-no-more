@@ -121,7 +121,7 @@ class ListPlaces extends Component {
       onChange={dropDownHandler}
        placeholder="Filter by Merchants"/>
     </div>
-    <ReactSVG src={MapIcon} onClick={this.props.history.push('/map')}/>
+    <ReactSVG src={MapIcon} onClick={() => this.props.history.push('/map')}/>
 
     </div>
 

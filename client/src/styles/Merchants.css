@@ -48,3 +48,7 @@
   padding: 10px;
   align-items: center;
 }
+
+.filter {
+  width: 200px;
+}
