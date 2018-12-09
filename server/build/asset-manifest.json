@@ -7,7 +7,7 @@
   "static/js/1.42869840.chunk.js.map": "/static/js/1.42869840.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.229c360f.js",
   "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/media/semantic.min.css": "/static/media/flags.9c74e172.png",
+  "static/media/semantic.min.css": "/static/media/brand-icons.a1a749e8.svg",
   "static/media/Price.svg": "/static/media/Price.075d9c80.svg",
   "static/media/Guide.svg": "/static/media/Guide.4cd99bc3.svg",
   "static/media/Map_icon.svg": "/static/media/Map_icon.33ec1984.svg",
@@ -17,9 +17,9 @@
   "static/media/X_Button.svg": "/static/media/X_Button.a0ab9872.svg",
   "static/media/delete.svg": "/static/media/delete.2a007d0e.svg",
   "static/media/Markets.svg": "/static/media/Markets.ea609758.svg",
-  "static/css/main.1b490970.chunk.css.map": "/static/css/main.1b490970.chunk.css.map",
   "static/css/1.8b6ff21c.chunk.css.map": "/static/css/1.8b6ff21c.chunk.css.map",
+  "static/css/main.1b490970.chunk.css.map": "/static/css/main.1b490970.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.ac93b1dbd5abde7cb08712f1590fb2f2.js": "/precache-manifest.ac93b1dbd5abde7cb08712f1590fb2f2.js",
+  "precache-manifest.1af051eb28000229dc3ffbe6dd9b8424.js": "/precache-manifest.1af051eb28000229dc3ffbe6dd9b8424.js",
   "service-worker.js": "/service-worker.js"
 }
