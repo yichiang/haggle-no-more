@@ -25,7 +25,7 @@ class ListPlaces extends Component {
   getGooglePlaceInformation(i, address, points){
     var self = this;
     var  currLocs =  self.state.currLocs
-  
+
     var discoverHttp = new DiscoverHttp();
     var url = discoverHttp.domian + `googlePlace?query=${address.split(' ').join('+')}&location=${points[0]},${points[1]}`;
     var urlImage = discoverHttp.domian + `googlePlaceImage?photo_reference=`;
@@ -61,7 +61,8 @@ class ListPlaces extends Component {
              currLocsNew.place_id = pla.results[j].place_id || 'n/a';
              currLocsNew.reference = pla.results[j].reference || 'n/a';
 
-             currLocs.unshift(currLocsNew)
+             currLocs.splice( i, 0, currLocsNew );
+
            }
          }
 
@@ -104,7 +105,7 @@ setDataPlaces(){
 
   this.state.currLocs.map((x, i) => {
 
-    if(i > 2){
+    if(i > 10){
       return x;
     }else{
       console.log("x!!!", i)
