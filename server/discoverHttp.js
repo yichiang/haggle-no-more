@@ -9,15 +9,17 @@ module.exports = class DiscoverHttp {
     this.domian = 'https://api.discover.com/'
     this.tokenURL = 'https://apis.discover.com/auth/oauth/v2/token'
     this.ENDPOINT = {
-      EXCHANGE_RATE: 'dci/currencyconversion/v1/exchangerate'
+      EXCHANGE_RATE: 'dci/currencyconversion/v1/exchangerate',
+      CITY_GUIDE: 'cityguides/v2/merchants'
     }
 
     this.HEADER_PLAN = {
-      'EXCHANGE_RATE': 'DCI_CURRENCYCONVERSION_SANDBOX'
+      'EXCHANGE_RATE': 'DCI_CURRENCYCONVERSION_SANDBOX',
+      'CITY_GUIDE': 'CITYGUIDES_SANDBOX'
 
     }
 
-    this.authToken = 'fb317d56-8cc8-4713-bf3b-e5fddba667fb'
+    this.authToken = ''
     this.scope = 'CITYGUIDES DCIOFFERS DCIOFFERS_POST DCILOUNGES DCILOUNGES_POST DCILOUNGES_PROVIDER_LG DCILOUNGES_PROVIDER_DCIPL DCI_ATM DCI_CURRENCYCONVERSION DCI_CUSTOMERSERVICE DCI_TIP'
 
    }
@@ -51,6 +53,21 @@ module.exports = class DiscoverHttp {
     }
     const url = this.domian + this.ENDPOINT.EXCHANGE_RATE + "?currencycd=" + currencycd;
     const headers = {"X-DFS-API-PLAN": this.HEADER_PLAN.EXCHANGE_RATE, "Authorization": "Bearer " + this.authToken }
+
+    return this.getData(url, headers )
+  }
+
+
+  async getCityGuide(cityname) {
+    if(!this.authToken){
+      this.authToken = await this.getBearToken().then(x => {console.log("getBearToken", x); return x.access_token;});
+      console.log("token", this.authToken)
+      if(!this.authToken){
+        return;
+      }
+    }
+    const url = this.domian + this.ENDPOINT.CITY_GUIDE + "?merchant_city=" + cityname;
+    const headers = {"X-DFS-API-PLAN": this.HEADER_PLAN.CITY_GUIDE, "Authorization": "Bearer " + this.authToken }
 
     return this.getData(url, headers )
   }

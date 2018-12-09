@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './../styles/App.css';
 import { Divider } from 'semantic-ui-react'
 import MerchItem from './MerchItem';
+import DiscoverHttp from './../extension/discoverHttp'
+
 
 class ListPlaces extends Component {
   constructor(props) {
@@ -12,41 +14,34 @@ class ListPlaces extends Component {
         {name: 'John Store', id: 2}
       ]
     }
+  }
 
 
 
+  componentDidMount(){
+
+    var discoverHttp = new DiscoverHttp();
+    let res = discoverHttp.getCityGuide("bangkok");
+    console.log(JSON.stringify(res, undefined, 2))
+  }
+
+
+  render() {
     const PlaceLists = () => {
-      const merItems = this.state.map(m => {
-        return <li>{m.name}</li>
+      const merItems = this.state.merchesArray.map(m => {
+        return <li key={m.id}>{m.name}</li>
       })
 
       return (
         <ul>{merItems}</ul>
       )
-
-
-
-      // this.state.merchesArray.map(merch => {
-      //   <MerchItem item={merch} id={merch.id}/>
-      // })
     }
-
-    const onPlaceClick = () => {
-      return null
-    }
-  }
-
-  componentDidMount(){
-    fetch()
-  }
-
-
-  render() {
+    
     return (
+      
 
 
-
-      <div class="HaggleContainer">
+      <div className="HaggleContainer">
         <PlaceLists />
       <Divider/>
       </div>

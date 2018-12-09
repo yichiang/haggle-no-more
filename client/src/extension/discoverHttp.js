@@ -5,12 +5,13 @@ export default class DiscoverHttp {
   domian = 'http://localhost:4200/'
 
   ENDPOINT = {
-    EXCHANGE_RATE: 'exchangerate'
+    EXCHANGE_RATE: 'exchangerate',
+    CITY_GUIDE: 'cityguide'
   }
 
   HEADER_PLAN = {
-    'EXCHANGE_RATE': 'DCI_CURRENCYCONVERSION_SANDBOX'
-
+    'EXCHANGE_RATE': 'DCI_CURRENCYCONVERSION_SANDBOX',
+    'CITY_GUIDE': 'CITYGUIDES'
   }
 
   getBearToken(){
@@ -28,6 +29,15 @@ export default class DiscoverHttp {
     console.log("headers", headers)
     return this.getData(url, headers )
   }
+
+  getCityGuide(cityname){
+
+    const url = this.domian + this.ENDPOINT.CITY_GUIDE + "?merchant_city=" + cityname;
+    const headers = {"X-DFS-API-PLAN": this.HEADER_PLAN.CITY_GUIDE, "Authorization": "Bearer " + this.authToken }
+    console.log("headers", headers)
+    return this.getData(url, headers )
+  }
+
 
   postData(url, data, extendHeader){
     const allHeader = {

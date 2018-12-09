@@ -25,6 +25,15 @@ app.get('/exchangerate', function(req, res, next) {
 });
 
 
+app.get('/cityguide', function(req, res, next) {
+  var discoverHttp = new DiscoverHttp();
+  return discoverHttp.getCityGuide(req.query.merchant_city).then(x => {
+    console.log(x, req.query.merchant_city);    
+    res.send(JSON.stringify(x));
+  })
+})
+
+
 app.listen(4200);
 
 console.log("Running at Port 4200");
