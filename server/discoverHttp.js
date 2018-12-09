@@ -17,7 +17,7 @@ module.exports = class DiscoverHttp {
 
     }
 
-    this.authToken = 'fb317d56-8cc8-4713-bf3b-e5fddba667fb'
+    this.authToken = ''
     this.scope = 'CITYGUIDES DCIOFFERS DCIOFFERS_POST DCILOUNGES DCILOUNGES_POST DCILOUNGES_PROVIDER_LG DCILOUNGES_PROVIDER_DCIPL DCI_ATM DCI_CURRENCYCONVERSION DCI_CUSTOMERSERVICE DCI_TIP'
 
    }
