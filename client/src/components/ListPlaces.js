@@ -14,6 +14,7 @@ var config = {
   GOOGLE_API_KEY: 'AIzaSyCZppRF9ySpc8AEdX8qS-1xJF0NdSWbND8'
 }
 
+
 class ListPlaces extends Component {
   constructor(props) {
     super(props);
@@ -23,14 +24,74 @@ class ListPlaces extends Component {
     }
   }
 
-  getGooglePlaceInformation(address, points){
-    console.log(address, points)
-    var url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${address.join('+')}&location=${points[0]},${points[1]}&radius=10000&key=` + config.GOOGLE_API_KEY;
+  getGooglePlaceInformation(i, address, points){
+    var self = this
     var discoverHttp = new DiscoverHttp();
-    discoverHttp.getData(url, {}).then(pla => console.log(pla))
+    var url = discoverHttp.domian + `googlePlace?query=${address.split(' ').join('+')}&location=${points[0]},${points[1]}`;
+    var urlImage = discoverHttp.domian + `googlePlaceImage?photo_reference=`;
+    $.ajax({
+      url: url,
+
+      type: 'GET',
+      success: function(response) {
+        var pla = $.parseJSON(response);
+;
+       if(pla.results && pla.results.length > 0){
+       var  currLocs =  self.state.currLocs
+       currLocs[i].rating = pla.results[0].rating || 0;
+       currLocs[i].place_id = pla.results[0].place_id || 'n/a';
+       currLocs[i].reference = pla.results[0].reference || 'n/a';
+       const photos = pla.results[0].photos
+       if(photos && photos.length){
+         currLocs[i].photo_reference  = photos[0].photo_reference;
+         $.ajax({
+            url: urlImage+photos[0].photo_reference,
+
+            type: 'GET',
+            success: function(response) {
+             //  console.log(response);
+             currLocs[i].imageBinary = response;
+             console.log("currLocs[i].imageBinary", currLocs[i].imageBinary);
+             self.setState({currLocs: currLocs})
+
+              return response
+            },
+            error: function(error) {
+            }
+           });
+
+       }
+       console.log("currLocs", currLocs[i])
+       self.setState({currLocs: currLocs})
+       }
+        return response
+      },
+      error: function(error) {
+      }
+     });
+
+    // var discoverHttp = new DiscoverHttp();
+    //
+    // discoverHttp.getData(, {}))
+    // .then(pla => {
+    //   console.log("pla",pla)
+    //
+    //   if(pla.results){
+    //   var  currLocs =  this.state.currLocs
+    //   currLocs[i].rating = pla.results[0].rating;
+    //   currLocs[i].place_id = pla.results[0].place_id;
+    //   currLocs[i].reference = pla.results[0].reference;
+    //   console.log("currLocs", currLocs[i])
+    //   this.setState({currLocs: currLocs})
+    //   }
+    // })
   }
+
+
   componentDidMount(){
     var discoverHttp = new DiscoverHttp();
+    var self = this;
+
     let res = discoverHttp.getCityGuide("bangkok")
               .then(obj => {
                 obj = JSON.parse(obj)
@@ -42,20 +103,29 @@ class ListPlaces extends Component {
               })
               .then(r => this.setState({currLocs: r}))
               .then(r => {
-                this.state.currLocs.map((x, i) => {
-                  if(i > 10){
-                    return x;
-                  }else{
-                    console.log(x)
-                    this.getGooglePlaceInformation(x.address1, x.point)
-                    return x;
-                  }
-
-                })
+                self.setDataPlaces();
               })
 
   }
 
+setDataPlaces(){
+  var self = this;
+
+  console.log("x!!!", this.state.currLocs)
+
+  this.state.currLocs.map((x, i) => {
+
+    if(i > 2){
+      return x;
+    }else{
+      console.log("x!!!", i)
+
+      self.getGooglePlaceInformation(i, x.address1, x.point)
+      return x;
+    }
+
+  })
+}
 
   render() {
     let idIter = 0
@@ -109,6 +179,8 @@ class ListPlaces extends Component {
         return loc.mcc === selected.value
       })
       this.setState({currLocs: s})
+      this.setDataPlaces();
+
     }
 
     return (

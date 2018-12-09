@@ -3,7 +3,7 @@ import './../styles/App.css';
 import DiscoverLogo from './../images/DiscoverLogo.svg';
 import ReactSVG from 'react-svg'
 import './../styles/Merchants.css'
-import { Icon} from 'semantic-ui-react'
+import { Icon, Rating} from 'semantic-ui-react'
 
 class MerchItem extends Component {
   render() {
@@ -26,7 +26,9 @@ class MerchItem extends Component {
                 <div className="merchants_row_item">
                   <div>
                   <p className='text_address'>{m.address1}</p>
-                  <p className='text_address'>{m.phone}</p>
+                  <p className='text_address'>{m.phone}
+                  </p>
+                  {m.rating && <Rating icon='star' defaultRating={m.rating} maxRating={5} />} {m.rating}
 
                   </div>
                   <div>
@@ -36,5 +38,6 @@ class MerchItem extends Component {
     );
   }
 }
+// {m.imageBinary &&  <img src={"data:image/png;" + m.imageBinary} />}
 
 export default MerchItem;
