@@ -6,6 +6,7 @@ import DiscoverHttp from './../extension/discoverHttp'
 import Send_Button from './../images/Send_Button.svg';
 import Check_Button from './../images/Check_Button.svg';
 import X_Button from './../images/X_Button.svg';
+import Back_Button from './../images/delete.svg';
 import ReactSVG from 'react-svg'
 import Footer from './Footer';
 
@@ -142,7 +143,9 @@ offerMake(){
 
 </div>
 <div  className="cal_col_test">
-<p className="letter_square" onClick={() => this.onHandleAction('back')}>{'<'}</p>
+<p className="letter_square" onClick={() => this.onHandleAction('back')}>
+<ReactSVG src={Back_Button} svgStyle={{ width: 20 }}/>
+</p>
 <p className="letter_square letter_icon" onClick={() => this.onHandleAction('offer')}>
 <ReactSVG src={Send_Button}
 svgStyle={{ width: 20 }}
