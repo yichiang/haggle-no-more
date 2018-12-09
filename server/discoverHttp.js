@@ -19,7 +19,7 @@ module.exports = class DiscoverHttp {
 
     }
 
-    this.authToken = '97b185c0-2df8-4673-ab74-1e787d9a9111'
+    this.authToken = '39bd7f49-e69e-4ebb-beec-bfe44899af7d';
     this.scope = 'CITYGUIDES DCIOFFERS DCIOFFERS_POST DCILOUNGES DCILOUNGES_POST DCILOUNGES_PROVIDER_LG DCILOUNGES_PROVIDER_DCIPL DCI_ATM DCI_CURRENCYCONVERSION DCI_CUSTOMERSERVICE DCI_TIP'
 
    }
@@ -66,7 +66,7 @@ module.exports = class DiscoverHttp {
         return;
       }
     }
-    const url = this.domian + this.ENDPOINT.CITY_GUIDE + "?merchant_city=" + cityname;
+    const url = this.domian + this.ENDPOINT.CITY_GUIDE + "?merchant_city=" + cityname + "&pagesize=300";
     const headers = {"X-DFS-API-PLAN": this.HEADER_PLAN.CITY_GUIDE, "Authorization": "Bearer " + this.authToken }
 
     return this.getData(url, headers )
