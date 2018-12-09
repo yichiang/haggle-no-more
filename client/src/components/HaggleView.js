@@ -9,7 +9,6 @@ import X_Button from './../images/X_Button.svg';
 import ReactSVG from 'react-svg'
 import Footer from './Footer';
 
-
 class HaggleView extends Component {
 
 constructor(){
@@ -22,6 +21,7 @@ constructor(){
     showOffer: false
   }
   this.allButtons = this.getNumbers();
+  this.offerMake = this.offerMake.bind(this)
 }
 componentDidMount() {
     var discoverHttp = new DiscoverHttp();
@@ -70,24 +70,37 @@ OnPressChangeVal(value){
   console.log(value)
   this.handleNumber(value)
 }
+
+offerMake(){
+  this.props.history.push('/feedback')
+
+}
   render() {
     return (
       <div>
       {this.state.showOffer &&
         <div className="offer_panel">
-        Accept
+        <div className="offer_inner">
+        <p className="client_view_price" style={{margin: 0}}>
+        ฿ {this.state.convertValues.toFixed(2).toLocaleString()}
+        </p>
+
+        <div className="group_button">
+        <div  onClick={this.offerMake}>
         <ReactSVG src={Check_Button}
         svgStyle={{ width: 50 }}
-
-        />
-
-        <ReactSVG src={X_Button}
-        svgStyle={{ width: 50 }}
-
         />
         </div>
+        <div>
+        <ReactSVG src={X_Button}
+        svgStyle={{ width: 50 }}
+        />
+        </div>
+      </div>
+      </div>
+        </div>
       }
-      <div className="cal_main">
+      <div className={this.state.showOffer? "cal_main cal_main_openOffer": "cal_main"}>
       <div className="cal_main_wrap">
       <div className="cal_display">
       <div><Flag name='th'  svgStyle={{ width: 25 }} /></div>

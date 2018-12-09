@@ -5,6 +5,8 @@
   align-items: center;
   margin: 0px !important;
   padding: 0 20px !important;
+  font-family: 'IBM Plex Sans', sans-serif;
+
 }
 
 .g_icon_column {
@@ -26,18 +28,27 @@
 
 .letter_square {
   display: flex;
-justify-content: center;
-align-items: center;
-color: white;
-font-size: 26px;
-margin: 0
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 26px;
+  margin: 0
 
 }
 
+.letter_square:active {
+  -webkit-animation: effect-animation 2s;
+}
+
 .cal_main {
-  background-image: linear-gradient(to top, #EC6434, rgba(255,0,0,0));
+  background-image: linear-gradient(to top, #EC6434, #e89476);
   padding: 25px;
   height: calc(100vh - 66px);
+
+}
+
+.cal_main_openOffer {
+  height: calc(100vh - 214px);
 
 }
 
@@ -68,9 +79,9 @@ margin: 0
 }
 .cal_col_test {
   max-width: 20px;
-display: flex;
-flex-direction: column;
-justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 
@@ -80,9 +91,30 @@ justify-content: space-between;
 
 .offer_panel {
   min-height: 150px;
-  background-image: linear-gradient(to top, #EC6434, rgba(255,0,0,0));
-  /* transform: rotate(180deg); */
+  background-image: linear-gradient(to top, #EC6434, #e89476);
+  transform: rotate(180deg);
+}
 
+.client_view_price {
+  font-size: 30px;
+  color: white;
+}
+
+.offer_inner {
+  max-width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+
+}
+
+.group_button{
+  display: flex;
+  width: 150px;
+  justify-content: space-around;
 }
 @-webkit-keyframes effect-animation {
     from {
@@ -90,7 +122,7 @@ justify-content: space-between;
       opacity: 0.4;
     }
     to {
-      -webkit-transform: scale(100);
+      -webkit-transform: scale(2);
       opacity: 0;
     }
 }
