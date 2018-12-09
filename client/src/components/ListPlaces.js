@@ -10,12 +10,7 @@ class ListPlaces extends Component {
     super(props);
     this.state = {
       currLocs: [],
-      allLocs: [],
-      merchesArray: [
-        // {name:'Bob Shop', id: 1},
-        // {name: 'John Store', id: 2}
-      ],
-      
+      allLocs: []
     }
   }
 
@@ -40,8 +35,10 @@ class ListPlaces extends Component {
     const Places = () => {
       const merItems = this.state.currLocs.map(m => {
         idIter++;
-        return <li key={idIter} style={locStyle}>
-                  <h3>{m.name}</h3>
+        return <li key={idIter} style={locStyle} className="locItem">
+                  {m.website 
+                    ? <a href={m.website}><h3>{m.name}</h3></a> 
+                    : <h3 style={{color:'#4183C6'}}>{m.name}</h3>}
                   <p> Address: {m.address1}</p>
               </li>
       })
@@ -50,7 +47,8 @@ class ListPlaces extends Component {
         <ul style={placesStyle}>{merItems}</ul>
       )
     }
-
+    
+  
     const topStyle = {
       backgroundColor: '#EC6434',
       // marginTop: -42,
@@ -74,9 +72,9 @@ class ListPlaces extends Component {
     }
 
     const locStyle = {
-      borderColor: 'white'
-
+      borderColor: 'white',
     }
+
 
     const dropOptions = ['retail', 'restaurants', 'hotels']
 
@@ -91,7 +89,7 @@ class ListPlaces extends Component {
     return (
       <div className="listPlaces">
         <div className="top" style={topStyle}>
-          Top Banner
+          <p className="topText">Top Banner Text</p>
         </div>
 
         <div className="filter" style={{fontSize: 25}}>
