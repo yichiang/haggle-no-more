@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './../styles/App.css';
 import Footer from './Footer';
+import ListIcon from './../images/List_Icon.svg';
+import ReactSVG from 'react-svg'
+import './../styles/Merchants.css'
 
 class MapView extends Component {
 
@@ -30,6 +33,11 @@ class MapView extends Component {
         <div className="top" style={topStyle}>
           <p className="topText">Bangkok Markets</p>
         </div>
+      
+      <div className="second_handler" >
+      <div></div>
+        <ReactSVG src={ListIcon} className="clickableIcon" onClick={() => this.props.history.push('/place')}/>
+      </div>
 
         <iframe 
           title="Leaflet map of location with markets marked"
