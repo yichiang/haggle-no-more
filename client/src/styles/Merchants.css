@@ -14,7 +14,7 @@
   padding: 0;
 }
 .text_title {
-  font-family: IBM plex sans semibold, san-serif;
+  font-family: 'IBM plex sans' semibold, san-serif;
   font-size: 16px;
   line-height: 20px;
   color: #111111;
@@ -25,7 +25,7 @@
   color: #444444;
   font-size: 13px;
   line-height: 18px;
-  font-family: IBM plex sans regular, san-serif;
+  font-family: 'IBM plex sans' regular, san-serif;
   margin: 0;
 }
 
