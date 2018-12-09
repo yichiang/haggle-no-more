@@ -1,5 +1,5 @@
 #root {
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif !important;
 }
 .g_footer {
   width: 100%;
