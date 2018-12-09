@@ -223,7 +223,7 @@ setDataPlaces(){
       <div><Footer {...this.props}/></div>
       </div>
       :
-      <MapView toggleMaps = {this.toggleMaps}/>
+      <MapView toggleMaps = {this.toggleMaps} {...this.props}/>
       }
       </div>
     );
