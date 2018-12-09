@@ -129,12 +129,20 @@ setDataPlaces(){
 
 }
 
+  getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+
   render() {
     let idIter = 0
+    let dist = 0.1;
     const Places = () => {
         const merItems = this.state.currLocs.map(m => {
           idIter++;
-          return <MerchItem idIter={idIter} m={m} locStyle={locStyle}/>
+          let val = this.getRandomInt(200);
+          if(val % 3 === 0){dist += 0.1}
+          // console.log(dist.toFixed(1))
+          return <MerchItem idIter={idIter} m={m} locStyle={locStyle} dist={dist.toFixed(1)}/>
         })
 
         return (
