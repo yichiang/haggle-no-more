@@ -155,13 +155,12 @@ setDataPlaces(){
 
     const topStyle = {
       backgroundColor: '#EC6434',
-      // marginTop: -42,
       width: '100%',
       height: 50,
       textAlign: 'center',
       color: 'white',
-      fontSize: 30
-
+      fontSize: 25,
+      paddingTop: '5px'
     }
 
     const placesStyle = {
@@ -202,7 +201,7 @@ setDataPlaces(){
         </div>
 
     <div className="second_handler" >
-    <div className="filter" style={{fontSize: 25}}>
+    <div className="filter" style={{fontSize: 18}}>
       <Dropdown options={dropOptions} value={this.state.curDropVal}
       onChange={dropDownHandler}
        placeholder="Filter by Merchants"/>

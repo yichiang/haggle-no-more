@@ -18,16 +18,17 @@ class MapView extends Component {
       overflowY: 'hidden'
     }
 
+
     const topStyle = {
       backgroundColor: '#EC6434',
-      // marginTop: -42,
       width: '100%',
       height: 50,
       textAlign: 'center',
       color: 'white',
-      fontSize: 30
-
+      fontSize: 25,
+      paddingTop: '5px'
     }
+    
     return (
       <div>
         <div className="top" style={topStyle}>
