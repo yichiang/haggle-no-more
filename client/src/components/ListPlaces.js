@@ -9,6 +9,7 @@ import ReactSVG from 'react-svg'
 import MapIcon from './../images/Map_icon.svg';
 import MerchItem from './MerchItem'
 import Footer from './Footer';
+import $ from 'jquery'
 
 var config = {
   GOOGLE_API_KEY: 'AIzaSyCZppRF9ySpc8AEdX8qS-1xJF0NdSWbND8'
