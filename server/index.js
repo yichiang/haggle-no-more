@@ -2,6 +2,7 @@ var express = require("express");
 var app     = express();
 var path    = require("path");
 var DiscoverHttp = require('./discoverHttp')
+var GooglePlaceHttp = require('./googlePlaceHttp')
 var cors = require('cors')
 
 app.all('/*', function(req, res, next) {
@@ -23,6 +24,31 @@ app.use(express.static(__dirname + '/build'));
 console.log(`${process.cwd()}/build/index.html`)
 
 
+
+app.get('/googlePlace', function(req, res, next) {
+  // Handle the get for this route
+  var googlePlaceHttp = new GooglePlaceHttp();
+  var resT = googlePlaceHttp.getPlaceDetail(req.query.query, req.query.location).then(x => {
+    console.log(x)
+    res.send(JSON.stringify(x));
+
+  })
+
+
+  //discoverHttp.getExchangeRate().then(res => console.log(res));
+});
+
+app.get('/googlePlaceImage', function(req, res, next) {
+  // Handle the get for this route
+  var googlePlaceHttp = new GooglePlaceHttp();
+  googlePlaceHttp.getPlaceImage(req.query.photo_reference).then(x => {
+    console.log("googlePlaceImage", x)
+    res.send(x);
+
+  })
+
+  //discoverHttp.getExchangeRate().then(res => console.log(res));
+});
 app.get('/getBearToken', function(req, res, next) {
   // Handle the get for this route
   var discoverHttp = new DiscoverHttp();
