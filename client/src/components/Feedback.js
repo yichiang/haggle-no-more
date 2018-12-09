@@ -25,6 +25,12 @@ constructor(){
       'optionsType': 'multi',
       'options': ['0-30%', '30-60%', '60-90%']
 
+    },
+    {
+      'q': 'Super awesome! You\'re in the top 25% of bargainers in this market!',
+      'optionsType': 'multi',
+      'options': ['Yay! 👍']
+
     }
   ],
     currentQuestions: 0,
