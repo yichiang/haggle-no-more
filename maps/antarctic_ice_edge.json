@@ -1,0 +1,19 @@
+{
+  "type": "FeatureCollection",
+  "features": [{
+    "type": "Feature",
+    "properties": {
+      "scalerank": 5,
+      "featurecla": "Antarctic Ice Shelf Edge"
+    },
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [
+        [
+
+        ]
+      ]
+    }
+  }]
+}
+
