@@ -64,7 +64,7 @@ app.get('/getBearToken', function(req, res, next) {
 app.get('/atmFinder', function(req, res, next) {
   // Handle the get for this route
   var discoverHttp = new DiscoverHttp();
-  return discoverHttp.getAtmFinder(req.query.longitude, req.query.latitude).then(x => {
+  return discoverHttp.getAtmFinder(req.query.longitude, req.query.latitude,req.query.radius, req.query.maxresults).then(x => {
     console.log(x)
     res.send(JSON.stringify(x));
 

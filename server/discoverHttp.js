@@ -43,7 +43,7 @@ module.exports = class DiscoverHttp {
     });
     return this.postData(this.tokenURL, postData, headers);
   }
-async getAtmFinder(longitude, latitude){
+async getAtmFinder(longitude, latitude,radius, maxresults ){
   if(!this.authToken){
     this.authToken = await this.getBearToken().then(x => {console.log("getBearToken", x); return x.access_token;});
     console.log("token", this.authToken)
@@ -51,7 +51,7 @@ async getAtmFinder(longitude, latitude){
       return;
     }
   }
-  const url = this.domian + this.ENDPOINT.ATM_FINDER + "?radius=10&view=1&longitude=" + longitude + "&latitude="+ latitude;
+  const url = this.domian + this.ENDPOINT.ATM_FINDER + "?radius="+radius"&view=1&maxresults="+"&longitude=" + longitude + "&latitude="+ latitude;
   const headers = {"X-DFS-API-PLAN": this.HEADER_PLAN.ATM_FINDER, "Authorization": "Bearer " + this.authToken }
 
   return this.getData(url, headers )
