@@ -36,10 +36,10 @@ componentDidMount() {
 handleNumber(number){
   const currentDisplayVal = this.state.propsedValues * 10 +  number;
   console.log("this.state.exchange_rate", this.state.exchange_rate)
-  console.log(currentDisplayVal * this.state.exchange_rate)
+  console.log(currentDisplayVal / this.state.exchange_rate)
   this.setState({
     propsedValues: currentDisplayVal,
-    convertValues: currentDisplayVal * this.state.exchange_rate
+    convertValues: currentDisplayVal / this.state.exchange_rate
   });
  }
 

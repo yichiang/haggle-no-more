@@ -10,12 +10,14 @@ module.exports = class DiscoverHttp {
     this.tokenURL = 'https://apis.discover.com/auth/oauth/v2/token'
     this.ENDPOINT = {
       EXCHANGE_RATE: 'dci/currencyconversion/v1/exchangerate',
-      CITY_GUIDE: 'cityguides/v2/merchants'
+      CITY_GUIDE: 'cityguides/v2/merchants',
+      ATM_FINDER: 'dci/atm/v1/locations'
     }
 
     this.HEADER_PLAN = {
       'EXCHANGE_RATE': 'DCI_CURRENCYCONVERSION_SANDBOX',
-      'CITY_GUIDE': 'CITYGUIDES_SANDBOX'
+      'CITY_GUIDE': 'CITYGUIDES_SANDBOX',
+      'ATM_FINDER': 'DCI_ATM_SANDBOX'
 
     }
 
@@ -27,7 +29,7 @@ module.exports = class DiscoverHttp {
   getAPIKey(){
     return config.DISCOVER_APP_API_KEY;
   }
-  getBearToken(){
+  async getBearToken(){
     const tokenAPIKey = config.DISCOVER_APP_API_KEY
     const tokenAPISecret =config.DISCOVER_APP_API_SECRET
     console.log("\n" + `${tokenAPIKey}:${tokenAPISecret}` + "\n")
@@ -41,7 +43,19 @@ module.exports = class DiscoverHttp {
     });
     return this.postData(this.tokenURL, postData, headers);
   }
+async getAtmFinder(longitude, latitude){
+  if(!this.authToken){
+    this.authToken = await this.getBearToken().then(x => {console.log("getBearToken", x); return x.access_token;});
+    console.log("token", this.authToken)
+    if(!this.authToken){
+      return;
+    }
+  }
+  const url = this.domian + this.ENDPOINT.ATM_FINDER + "?radius=10&view=1&longitude=" + longitude + "&latitude="+ latitude;
+  const headers = {"X-DFS-API-PLAN": this.HEADER_PLAN.ATM_FINDER, "Authorization": "Bearer " + this.authToken }
 
+  return this.getData(url, headers )
+}
 
   async getExchangeRate(currencycd){
     if(!this.authToken){
@@ -98,9 +112,13 @@ module.exports = class DiscoverHttp {
         },
     };
     console.log("allHeader", allHeader)
-
+    var self = this;
     return fetch(url, allHeader)
-    .then(response => response.json());
+    .then(response => response.json())
+    .catch(error => {
+      self.getBearToken().then(x => {console.log("getBearToken", x); self.authToken = x.access_token;return x.access_token;});
+
+    });
   }
 
 
