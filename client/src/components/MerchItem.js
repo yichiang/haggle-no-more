@@ -21,21 +21,35 @@ class MerchItem extends Component {
                   </div>
                   <div>
                   {m.card_network === "DCI" && <ReactSVG src={DiscoverLogo}/>}
-                  
+
+                  </div>
+                </div>
+                <div className="merchants_row_item">
+                  <div>
+                  <p className='text_address' style={{maxwidth: '50%'}}>{m.address1}</p>
+                  </div>
+                  <div>
                   <div style={{marginTop:-2}}><p className='text_address'>0.1 m</p></div>
                   </div>
                 </div>
                 <div className="merchants_row_item">
                   <div>
-                  <p className='text_address'>{m.address1}</p>
-                  <p className='text_address'>{m.phone}
-                  </p>
-                  {m.rating > 0 && <Rating icon='star' defaultRating={m.rating} maxRating={5} />}
-                  {m.rating > 0 && <span>{m.rating}</span>}
+                    <p className='text_address'>{m.phone}</p>
+                    {m.rating > 0 && <Rating icon='star' defaultRating={m.rating} maxRating={5} />}
+                    {m.rating > 0 && <span>{m.rating}</span>}
 
                   </div>
                   <div>
                   </div>
+                </div>
+                <div className="merchants_row_item">
+                  <div>
+                    <p className='bargin_text'>
+                    Avg. 0 - {Math.round((30 * Math.random()))}% bargaining discount</p>
+
+
+                  </div>
+
                 </div>
             </div>
     );
