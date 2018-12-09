@@ -5,10 +5,129 @@
   align-items: center;
   margin: 0px !important;
   padding: 0 20px !important;
+  font-family: 'IBM Plex Sans', sans-serif;
+
 }
 
 .g_icon_column {
   margin: auto !important;
   display: flex !important;
   justify-content: center !important;
+}
+
+.letter_square {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.cal_row {
+  display: flex;
+  justify-content: center;
+}
+
+.letter_square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 26px;
+  margin: 0
+
+}
+
+.letter_square:active {
+  -webkit-animation: effect-animation 2s;
+}
+
+.cal_main {
+  background-image: linear-gradient(to top, #EC6434, #e89476);
+  padding: 25px;
+  height: calc(100vh - 66px);
+
+}
+
+.cal_main_openOffer {
+  height: calc(100vh - 214px);
+
+}
+
+.cal_display{
+  padding: 10px;
+  background-color: white;
+  border-radius: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cal_display > p {
+  font-size: 15px;
+}
+
+
+.cal_main_wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.letter_icon {
+  transform: rotate(180deg);
+
+}
+.cal_col_test {
+  max-width: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.cal_display > div {
+
+}
+
+.offer_panel {
+  min-height: 150px;
+  background-image: linear-gradient(to top, #EC6434, #e89476);
+  transform: rotate(180deg);
+}
+
+.client_view_price {
+  font-size: 30px;
+  color: white;
+}
+
+.offer_inner {
+  max-width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+
+}
+
+.group_button{
+  display: flex;
+  width: 150px;
+  justify-content: space-around;
+}
+@-webkit-keyframes effect-animation {
+    from {
+      -webkit-transform: scale(1);
+      opacity: 0.4;
+    }
+    to {
+      -webkit-transform: scale(2);
+      opacity: 0;
+    }
+}
+
+
+.locItem:hover{
+  background-color: lightblue;
 }
