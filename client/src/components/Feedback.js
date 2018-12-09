@@ -56,7 +56,7 @@ onPressSubmit(){
     return (
       <div>
 
-      <div className="top_header">Bankok Markets</div>
+      <div className="top_header">Bangkok Markets</div>
       <div>
       <div className="main_feedback_body">
         <div className="main_feedback_q">
