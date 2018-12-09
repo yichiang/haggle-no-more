@@ -6,6 +6,7 @@ import Home from './components/Home';
 import ListPlaces from './components/ListPlaces';
 import HaggleView from './components/HaggleView';
 import MapView from './components/MapView';
+import Footer from './components/Footer';
 
 import 'semantic-ui-css/semantic.min.css';
 

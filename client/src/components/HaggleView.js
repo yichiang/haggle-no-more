@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import './../styles/App.css';
-import { Divider, Button } from 'semantic-ui-react'
+import { Divider, Button, Flag } from 'semantic-ui-react'
 import $ from 'jquery'
 import DiscoverHttp from './../extension/discoverHttp'
+import Send_Button from './../images/Send_Button.svg';
+import Check_Button from './../images/Check_Button.svg';
+import X_Button from './../images/X_Button.svg';
+import ReactSVG from 'react-svg'
+import Footer from './Footer';
 
 
 class HaggleView extends Component {
@@ -13,7 +18,8 @@ constructor(){
     propsedValues: 0,
     convertValues: 0,
     exchange_rate: 0,
-    currencycd: "THB"
+    currencycd: "THB",
+    showOffer: false
   }
   this.allButtons = this.getNumbers();
 }
@@ -39,12 +45,17 @@ handleNumber(number){
 
  onHandleAction(action){
    if(action === 'back'){
-     this.setState({ propsedValues: parseInt(this.state.propsedValues / 10) });
+     const currentDisplayVal = parseInt(this.state.propsedValues / 10)
+
+     this.setState({ propsedValues: currentDisplayVal ,
+       convertValues: currentDisplayVal * this.state.exchange_rate
+
+     });
    }
-   // else if(action === 'convert'){
-   //   this.setState({ convertValues: this.setate.propsedValues * this.state.exchange_rate });
-   //
-   // }
+   else if(action === 'offer'){
+     this.setState({ showOffer: true });
+
+   }
   }
 
 
@@ -62,17 +73,79 @@ OnPressChangeVal(value){
   render() {
     return (
       <div>
-        <div>${this.state.propsedValues}</div>
-        {this.allButtons.map(x => <Button key={x} onClick={() => this.OnPressChangeVal(x)}>{x}</Button>)}
-        <Button  onClick={() => this.onHandleAction('back')}>Back</Button>
-        <Button onClick={() => this.onHandleAction('convert')}>Convert</Button>
-        <Divider/>
-        <div>{this.state.currencycd} {this.state.convertValues.toFixed(2).toLocaleString()}</div>
-        <div>
+      {this.state.showOffer &&
+        <div className="offer_panel">
+        Accept
+        <ReactSVG src={Check_Button}
+        svgStyle={{ width: 50 }}
+
+        />
+
+        <ReactSVG src={X_Button}
+        svgStyle={{ width: 50 }}
+
+        />
+        </div>
+      }
+      <div className="cal_main">
+      <div className="cal_main_wrap">
+      <div className="cal_display">
+      <div><Flag name='th'  svgStyle={{ width: 25 }} /></div>
+
+        <p>฿ {this.state.convertValues.toFixed(2).toLocaleString()}</p>
       </div>
+      <div className="cal_display">
+
+        <div><Flag name='us'  svgStyle={{ width: 25 }} /></div>
+
+          <p>${this.state.propsedValues.toFixed(2).toLocaleString()}</p>
+        </div>
+        </div>
+<div style={{display: 'flex', justifyContent: 'center'}}>
+  <div className="">
+  <div className="cal_row">
+    <p className="letter_square" onClick={() => this.OnPressChangeVal(1)}>1</p>
+    <p className="letter_square" onClick={() => this.OnPressChangeVal(2)}>2</p>
+    <p className="letter_square" onClick={() => this.OnPressChangeVal(3)}>3</p>
+  </div>
+  <div className="cal_row">
+    <p className="letter_square" onClick={() => this.OnPressChangeVal(4)}>4</p>
+    <p className="letter_square" onClick={() => this.OnPressChangeVal(5)}>5</p>
+    <p className="letter_square" onClick={() => this.OnPressChangeVal(6)}>6</p>
+  </div>
+  <div className="cal_row">
+
+    <p className="letter_square" onClick={() => this.OnPressChangeVal(7)}>7</p>
+    <p className="letter_square" onClick={() => this.OnPressChangeVal(8)}>8</p>
+    <p className="letter_square" onClick={() => this.OnPressChangeVal(9)}>9</p>
+  </div>
+  <div className="cal_row">
+
+    <p className="letter_square" onClick={() => this.onHandleAction(',')}>,</p>
+    <p className="letter_square" onClick={() => this.OnPressChangeVal(0)}>0</p>
+    <p className="letter_square" onClick={() => this.onHandleAction('.')}>.</p>
+  </div>
+
+
+</div>
+<div  className="cal_col_test">
+<p className="letter_square" onClick={() => this.onHandleAction('back')}>{'<'}</p>
+<p className="letter_square letter_icon" onClick={() => this.onHandleAction('offer')}>
+<ReactSVG src={Send_Button}
+svgStyle={{ width: 20 }}
+
+/>
+</p>
+</div>
+</div>
+
+      </div>
+        <Footer/>
+
       </div>
     );
   }
 }
+// {this.allButtons.map(x => <Button key={x} onClick={() => this.OnPressChangeVal(x)}>{x}</Button>)}
 
 export default HaggleView;
