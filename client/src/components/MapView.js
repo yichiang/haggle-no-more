@@ -5,12 +5,21 @@ import { Divider, Button } from 'semantic-ui-react'
 class MapView extends Component {
 
   render() {
-    var page = require('../maps/index.html');
-    function createMarkup() { return {__html: 'First &middot; Second'}; };
+    const mapContainer = {
+      height: '100%',
+      width: '100%',
+      border: 0,
+      margin: 0,
+      position: 'fixed',
+      overflowY: 'hidden'
+    }
     return (
       <div>
         {/* <div dangerouslySetInnerHTML={createMarkup()} /> */}
-        <iframe src={page}></iframe>
+        <iframe 
+          src="https://s3.amazonaws.com/discoverhack/maps/index.html"
+          style={mapContainer}
+        ></iframe>
       </div>
     );
   }
