@@ -7,7 +7,7 @@ import { Icon, Rating} from 'semantic-ui-react'
 
 class MerchItem extends Component {
   render() {
-    const {idIter, m, locStyle} = this.props;
+    const {idIter, m, locStyle, dist} = this.props;
     return (
       <div key={idIter} style={locStyle} className="locItem">
           <div className="merchants_row_item">
@@ -29,7 +29,7 @@ class MerchItem extends Component {
                   <p className='text_address' style={{maxwidth: '50%'}}>{m.address1}</p>
                   </div>
                   <div>
-                  <div style={{marginTop:-2}}><p className='text_address'>0.1 m</p></div>
+                  <div style={{marginTop:-2}}><p className='text_address'>{dist} mi</p></div>
                   </div>
                 </div>
                 <div className="merchants_row_item">
