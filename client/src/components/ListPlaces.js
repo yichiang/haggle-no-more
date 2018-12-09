@@ -8,6 +8,8 @@ import './../styles/Merchants.css'
 import ReactSVG from 'react-svg'
 import MapIcon from './../images/Map_icon.svg';
 import MerchItem from './MerchItem'
+import Footer from './Footer';
+
 var config = {
   GOOGLE_API_KEY: 'AIzaSyCZppRF9ySpc8AEdX8qS-1xJF0NdSWbND8'
 }
@@ -127,6 +129,7 @@ class ListPlaces extends Component {
 
         <Places style={placesStyle} />
       <Divider/>
+      <div><Footer /></div>
       </div>
     );
   }

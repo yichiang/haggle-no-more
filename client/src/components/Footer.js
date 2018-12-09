@@ -4,7 +4,7 @@ import ReactSVG from 'react-svg'
 import Price from './../images/Price.svg';
 import Markets from './../images/Markets.svg';
 import Guide from './../images/Guide.svg';
-
+import './../styles/App.css';
 
 class Footer extends Component {
 
@@ -20,7 +20,7 @@ componentDidMount() {
 
   render() {
     return (
-      <div>
+      <div className="footerDiv">
 
       <Grid columns='three'  className="g_footer">
         <Grid.Row>
