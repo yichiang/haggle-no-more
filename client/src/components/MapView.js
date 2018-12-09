@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './../styles/App.css';
-import { Divider, Button } from 'semantic-ui-react'
 
 class MapView extends Component {
 
@@ -17,7 +16,7 @@ class MapView extends Component {
       <div>
         {/* <div dangerouslySetInnerHTML={createMarkup()} /> */}
         <iframe 
-          src="https://s3.amazonaws.com/discoverhack/maps/index.html"
+          src="localhost:3000/maps/index.html"
           style={mapContainer}
         ></iframe>
       </div>
