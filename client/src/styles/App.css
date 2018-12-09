@@ -141,3 +141,6 @@
   background-color: white;
 
 }
+.clickableIcon{
+  cursor: pointer
+}

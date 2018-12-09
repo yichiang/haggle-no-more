@@ -25,16 +25,16 @@ componentDidMount() {
       <Grid columns='three'  className="g_footer">
         <Grid.Row>
           <Grid.Column className="g_icon_column">
-            <ReactSVG src={Markets} onClick={() => {
+            <ReactSVG src={Markets} className="clickableIcon" onClick={() => {
               this.props.history.push('/place')
             }}/>
           </Grid.Column>
           <Grid.Column className="g_icon_column">
-            <ReactSVG src={Price} onClick={() => {
+            <ReactSVG src={Price} className="clickableIcon"  onClick={() => {
                 this.props.history.push('/haggle')
             } }/>
           </Grid.Column>
-          <Grid.Column className="g_icon_column">
+          <Grid.Column className="g_icon_column clickableIcon">
             <ReactSVG src={Guide}/>
           </Grid.Column>
         </Grid.Row>

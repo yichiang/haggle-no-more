@@ -188,7 +188,7 @@ setDataPlaces(){
       onChange={dropDownHandler}
        placeholder="Filter by Merchants"/>
     </div>
-    <ReactSVG src={MapIcon} onClick={() => this.props.history.push('/map')}/>
+    <ReactSVG src={MapIcon} className="clickableIcon" onClick={() => this.props.history.push('/map')}/>
 
     </div>
 
