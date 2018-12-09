@@ -1,0 +1,46 @@
+.top_header {
+  height: 50px;
+  background: #EC6434;
+  color: white;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 30px;
+  text-align: center;
+  padding: 10px;
+}
+.feedback_q {
+  font-size: 16px;
+    font-weight: 700;
+}
+.main_feedback_body{
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+}
+.main_feedback_q{
+    max-width: 81%;
+    margin: auto;
+}
+.all_feedback_selection {
+  display: flex;
+  margin-top: 50px;
+}
+.all_feedback_selection > div {
+  border: 2px solid #EC6434;
+  width: 200px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+
+}
+.all_feedback_selection > div:first-child  {
+      border-right: none;
+}
+
+.main_feedback_q > p {
+  font-size: 20px;
+  font-weight: 700;
+}
