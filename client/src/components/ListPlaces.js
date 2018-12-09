@@ -3,7 +3,14 @@ import './../styles/App.css';
 import { Divider } from 'semantic-ui-react'
 import DiscoverHttp from './../extension/discoverHttp'
 import Dropdown from 'react-dropdown';
-
+import 'react-dropdown/style.css'
+import './../styles/Merchants.css'
+import ReactSVG from 'react-svg'
+import MapIcon from './../images/Map_icon.svg';
+import MerchItem from './MerchItem'
+var config = {
+  GOOGLE_API_KEY: 'AIzaSyCZppRF9ySpc8AEdX8qS-1xJF0NdSWbND8'
+}
 
 class ListPlaces extends Component {
   constructor(props) {
@@ -14,8 +21,13 @@ class ListPlaces extends Component {
     }
   }
 
+  getGooglePlaceInformation(address, points){
+    console.log(address, points)
+    var url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${address.join('+')}&location=${points[0]},${points[1]}&radius=10000&key=` + config.GOOGLE_API_KEY;
+    var discoverHttp = new DiscoverHttp();
+    discoverHttp.getData(url, {}).then(pla => console.log(pla))
+  }
   componentDidMount(){
-
     var discoverHttp = new DiscoverHttp();
     let res = discoverHttp.getCityGuide("bangkok")
               .then(obj => {
@@ -27,6 +39,19 @@ class ListPlaces extends Component {
                 })
               })
               .then(r => this.setState({currLocs: r}))
+              .then(r => {
+                this.state.currLocs.map((x, i) => {
+                  if(i > 10){
+                    return x;
+                  }else{
+                    console.log(x)
+                    this.getGooglePlaceInformation(x.address1, x.point)
+                    return x;
+                  }
+
+                })
+              })
+
   }
 
 
@@ -35,20 +60,15 @@ class ListPlaces extends Component {
     const Places = () => {
       const merItems = this.state.currLocs.map(m => {
         idIter++;
-        return <li key={idIter} style={locStyle} className="locItem">
-                  {m.website 
-                    ? <a href={m.website}><h3>{m.name}</h3></a> 
-                    : <h3 style={{color:'#4183C6'}}>{m.name}</h3>}
-                  <p> Address: {m.address1}</p>
-              </li>
+        return <MerchItem idIter={idIter} m={m} locStyle={locStyle}/>
       })
 
       return (
-        <ul style={placesStyle}>{merItems}</ul>
+        <ul className="metchant_parents">{merItems}</ul>
       )
     }
-    
-  
+
+
     const topStyle = {
       backgroundColor: '#EC6434',
       // marginTop: -42,
@@ -57,7 +77,7 @@ class ListPlaces extends Component {
       textAlign: 'center',
       color: 'white',
       fontSize: 30
-      
+
     }
 
     const placesStyle = {
@@ -76,26 +96,34 @@ class ListPlaces extends Component {
     }
 
 
-    const dropOptions = ['retail', 'restaurants', 'hotels']
-
+    const dropOptions = [
+      { value: 'retail', label: 'Retail' },
+      { value: 'restaurants', label: 'Restaurants' },
+      { value: 'hotels', label: 'Hotels' }
+    ]
     const dropDownHandler = (selected) => {
       console.log(this.state.allLocs.result)
-      var s = this.state.allLocs.result.filter(loc => { 
+      var s = this.state.allLocs.result.filter(loc => {
         return loc.mcc === selected.value
       })
       this.setState({currLocs: s})
     }
-    
+
     return (
       <div className="listPlaces">
         <div className="top" style={topStyle}>
-          <p className="topText">Top Banner Text</p>
+          <p className="topText">Bankok Markets</p>
         </div>
 
-        <div className="filter" style={{fontSize: 25}}>
-          <Dropdown options={dropOptions} value={"Filter"} 
-          onChange={dropDownHandler} />
-        </div>
+    <div className="second_handler" >
+    <div className="filter" style={{fontSize: 25}}>
+      <Dropdown options={dropOptions} value={dropOptions[0]}
+      onChange={dropDownHandler}
+       placeholder="Filter by Merchants"/>
+    </div>
+    <ReactSVG src={MapIcon} onClick={this.props.history.push('/map')}/>
+
+    </div>
 
         <Places style={placesStyle} />
       <Divider/>
