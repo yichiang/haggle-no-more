@@ -1,0 +1,14 @@
+.g_footer {
+  width: 100%;
+  display: flex;
+  align-content: space-between;
+  align-items: center;
+  margin: 0px !important;
+  padding: 0 20px !important;
+}
+
+.g_icon_column {
+  margin: auto !important;
+  display: flex !important;
+  justify-content: center !important;
+}
